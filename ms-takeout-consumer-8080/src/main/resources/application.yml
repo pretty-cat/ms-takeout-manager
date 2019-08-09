@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: takeout-consumer
+
+feign:
+  hystrix:
+    enabled: true  #开启熔断机制
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka-server1:8761/eureka/,http://eureka-server2:8762/eureka/

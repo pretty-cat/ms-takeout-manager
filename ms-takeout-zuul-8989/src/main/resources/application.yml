@@ -1,0 +1,28 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: takeout-zuul
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: true
+    service-url:
+      default-zone: http://eureka-server1:8761/eureka/,http://eureka-server2:8762/eureka/
+
+zuul:
+  prefix: /v1
+  ignored-services: '*'
+  routes:
+    takeout-provider:  #该名字可以随便，通常和服务名一致
+      serviceId: takeout-provider
+      path: /tpp/**
+    takeout-consumer:
+      serviceId: takeout-consumer
+      path: /tc/**
+
+zull:
+  filter:
+    enable: true

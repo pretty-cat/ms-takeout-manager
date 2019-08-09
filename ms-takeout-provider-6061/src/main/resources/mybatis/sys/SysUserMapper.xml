@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.sys.dao.SysUserMapper">
+
+
+    <!--
+        size: 最多有多少key值，默认1024；
+        readonly: 是否只读。
+        flushInterval：清空缓存。单位是毫秒，默认不设置，不设置的清空下，当每次执行更新的时候，会自动清空。
+        eviction: LRU 移除最长时间不被使用的对象。
+        blocking: 是否阻塞，当缓存中没有数据的时候，会等待缓存框架将数据查询放入缓存，然后从缓存中取，而不是直接查询数据库。
+    -->
+    <cache type="com.qf.redisCache.RedisCache">
+
+    </cache>
+
+    <resultMap id="sysUserMap" type="com.qf.sys.pojo.SysUser">
+        <id property="id" column="id"/>
+        <result column="name" property="name"/>
+        <collection property="permissionSet" javaType="java.util.Set" ofType="com.qf.sys.pojo.SysPermission">
+            <result column="spname" property="name"/>
+            <result column="permission" property="permission"/>
+        </collection>
+    </resultMap>
+    
+    <!-- -->
+    <select id="selectSimpleInfo" parameterType="string" resultType="com.qf.sys.pojo.SysUser">
+        select id, name, password, salt from sys_user where name = #{name}
+    </select>
+    
+    <select id="sysUserPermissionInfo" parameterType="string" resultMap="sysUserMap">
+        select u.id, u.name, u.password, u.salt, sp.name spname, sp.permission
+		from sys_user u
+				join sys_user_role syr on u.id = syr.user_id
+				join sys_role sr on syr.role_id = sr.id
+				join sys_role_permission srp on sr.id = srp.role_id
+				join sys_permission sp on srp.permission_id = sp.id
+				where u.name = #{name};
+    </select>
+</mapper>

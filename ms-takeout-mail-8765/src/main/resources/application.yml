@@ -1,0 +1,16 @@
+server:
+  port: 8765
+
+spring:
+  mail:
+    username:     #邮箱
+    password:     # 通过其他的邮箱来发邮件时候，需要授权码
+    host: smtp.126.com   #从邮箱中拷贝的
+    default-encoding: UTF-8
+
+  thymeleaf:
+    mode: html     #指开发的thymeleaf的文件格式
+    enabled: true  #开启thymeleaf
+    prefix: classpath:/templates/  #前缀
+    suffix: .html            #后缀
+

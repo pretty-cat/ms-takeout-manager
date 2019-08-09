@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.qf</groupId>
+  <artifactId>ms-takeout-manager</artifactId>
+  <version>1.0</version>
+  <modules>
+    <module>ms-takeout-eureka-server-8761</module>
+    <module>ms-takeout-eureka-server-8762</module>
+    <module>ms-takeout-provider-6061</module>
+    <module>ms-takeout-commons</module>
+    <module>ms-takeout-consumer-8080</module>
+      <module>ms-takeout-zuul-8989</module>
+      <module>ms-takeout-consumer-8082</module>
+      <module>ms-takeout-timer-8123</module>
+      <module>ms-takeout-mail-8765</module>
+  </modules>
+  <packaging>pom</packaging>
+
+  <name>ms-takeout-manager</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+
+  <properties>
+      <takout.commons.version>1.0</takout.commons.version>
+  </properties>
+
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.6.RELEASE</version>
+  </parent>
+
+
+
+</project>
